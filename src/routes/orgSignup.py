@@ -9,7 +9,7 @@ orgSignupBP = flask.Blueprint("orgSignup", __name__)
 from main import orgsCol
 
 
-@orgSignupBP.route("/api/v1/org/signup", methods=["POST"])
+@orgSignupBP.route("/api/v1/org/signup", methods=["GET", "POST"])
 async def orgSignupFunction():
     data = flask.request.get_json()
     if data.get("username") and data.get("password") and data.get("org_name"):
