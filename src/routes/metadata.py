@@ -10,18 +10,19 @@ from main import opportunitiesCol
 
 @metadataBP.route("/api/v1/metadata", methods=["GET", "POST"])
 async def metadataFunction():
-    c = flask.request.args.get("c")  # CATEGORY
-    cdot = flask.request.args.get("cdoq")  # SEARCH ALL
-    d = flask.request.args.get("d")  # DESCRIPTION
-    id = flask.request.args.get("id")  # ID
-    m = flask.request.args.get("m")  # MIN HOURS
-    o = flask.request.args.get("o")  # ORG
-    r = flask.request.args.get("r")  # RANGE
-    t = flask.request.args.get("t")  # TITLE
-
     if flask.request.method == "GET":
+        c = flask.request.args.get("c")  # CATEGORY
+        cdot = flask.request.args.get("cdoq")  # SEARCH ALL
+        d = flask.request.args.get("d")  # DESCRIPTION
+        id = flask.request.args.get("id")  # ID
+        m = flask.request.args.get("m")  # MIN HOURS
+        o = flask.request.args.get("o")  # ORG
+        r = flask.request.args.get("r")  # RANGE
+        t = flask.request.args.get("t")  # TITLE
+
         tmp_metadata = []
         find_query = {}
+
         if c:
             find_query["categories"] = {"$eq": c}
         if cdot:
@@ -64,3 +65,6 @@ async def metadataFunction():
             ),
             200,
         )
+    elif flask.request.method == "POST":
+        a = flask.request.args.get("a")  # AUTH
+        data = flask.request.get_json()
