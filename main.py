@@ -18,7 +18,7 @@ if "" in config.values() or None in config.values():
     sys.exit()
 
 connection = (
-    "mongodb+srv://%s:%s@%s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    "mongodb+srv://%s:%s@%s.mongodb.net/azmeDB?retryWrites=true&w=majority"
     % (config["user"], config["pass"], config["name"])
 )
 client = pymongo.MongoClient(connection, tlsCAFile=certifi.where())
