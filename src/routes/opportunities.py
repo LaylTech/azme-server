@@ -1,15 +1,16 @@
+import json
+
 import flask
 from bson import json_util
 from bson.objectid import ObjectId
-import json
 
-metadataBP = flask.Blueprint("metadata", __name__)
+opportunitiesBP = flask.Blueprint("opportunities", __name__)
 
 from main import opportunitiesCol
 
 
-@metadataBP.route("/api/v1/metadata", methods=["GET", "POST"])
-async def metadataFunction():
+@opportunitiesBP.route("/api/v1/opportunities", methods=["GET", "POST"])
+async def opportunitiesFunction():
     if flask.request.method == "GET":
         c = flask.request.args.get("c")  # CATEGORY
         cdot = flask.request.args.get("cdoq")  # SEARCH ALL
@@ -20,7 +21,7 @@ async def metadataFunction():
         r = flask.request.args.get("r")  # RANGE
         t = flask.request.args.get("t")  # TITLE
 
-        tmp_metadata = []
+        opportunities = []
         find_query = {}
 
         if c:
@@ -52,14 +53,14 @@ async def metadataFunction():
             find_query["title"] = {"$regex": t, "$options": "i"}
 
         for item in opportunitiesCol.find(find_query).limit(r):
-            tmp_metadata.append(item)
+            opportunities.append(item)
 
         return (
             flask.jsonify(
                 {
                     "code": 200,
-                    "content": json.loads(json_util.dumps(tmp_metadata)),
-                    "message": "Metadata parsed successfully.",
+                    "content": json.loads(json_util.dumps(opportunities)),
+                    "message": "Opportunities parsed successfully.",
                     "success": True,
                 }
             ),

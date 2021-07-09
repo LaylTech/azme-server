@@ -1,6 +1,5 @@
 import json
 import os
-import pprint
 import sys
 
 import certifi
@@ -31,9 +30,9 @@ app = flask.Flask(__name__)
 flask_cors.CORS(app)
 app.secret_key = config.get("secret_key")
 
-from src.routes.metadata import metadataBP
+from src.routes.opportunities import opportunitiesBP
 
-app.register_blueprint(metadataBP)
+app.register_blueprint(opportunitiesBP)
 
 
 if __name__ == "__main__":
