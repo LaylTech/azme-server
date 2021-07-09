@@ -36,7 +36,7 @@ app.register_blueprint(opportunitiesBP)
 
 
 if __name__ == "__main__":
-    AZME_DEBUG = os.getenv("LIBDRIVE_DEBUG")
+    AZME_DEBUG = os.getenv("AZME_DEBUG")
     if AZME_DEBUG:
         if AZME_DEBUG.lower() == "true":
             AZME_DEBUG = True
