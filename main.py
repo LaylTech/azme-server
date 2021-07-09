@@ -17,9 +17,10 @@ if "" in config.values() or None in config.values():
     print("Config is incorrect.")
     sys.exit()
 
-connection = (
-    "mongodb+srv://%s:%s@%s.mongodb.net/azmeDB?retryWrites=true&w=majority"
-    % (config["user"], config["pass"], config["name"])
+connection = "mongodb+srv://%s:%s@%s.mongodb.net/azmeDB?retryWrites=true&w=majority" % (
+    config["user"],
+    config["pass"],
+    config["name"],
 )
 client = pymongo.MongoClient(connection, tlsCAFile=certifi.where())
 
@@ -37,6 +38,20 @@ from src.routes.orgSignup import orgSignupBP
 
 app.register_blueprint(opportunitiesBP)
 app.register_blueprint(orgSignupBP)
+
+
+@app.route("/")
+async def homeFunction():
+    return """
+        <body>
+            <h1>Welcome to the <a href="https://github.com/LaylTech/azme">azme</a> API!</h1>
+            <h3>API Endpoints:</h3>
+            <ul>
+                <li><a href="/api/v1/opportunities">Opportunities</a></li>
+                <li><a href="/api/v1/org/signup">Org Signup</a></li>
+            </ul>
+        </body>
+    """
 
 
 if __name__ == "__main__":
