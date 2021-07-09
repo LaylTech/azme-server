@@ -25,14 +25,18 @@ client = pymongo.MongoClient(connection, tlsCAFile=certifi.where())
 
 opportunitiesDB = client["opportunities"]
 opportunitiesCol = opportunitiesDB["main"]
+orgsDB = client["users"]
+orgsCol = orgsDB["main"]
 
 app = flask.Flask(__name__)
 flask_cors.CORS(app)
 app.secret_key = config.get("secret_key")
 
 from src.routes.opportunities import opportunitiesBP
+from src.routes.orgSignup import orgSignupBP
 
 app.register_blueprint(opportunitiesBP)
+app.register_blueprint(orgSignupBP)
 
 
 if __name__ == "__main__":
