@@ -26,7 +26,9 @@ async def orgsSignupFunction():
             "org_logo": data.get("org_logo"),
             "opportunities": [],
         }
-        username_match = orgsCol.find({"username": account.get("username")}).limit(1)
+        username_match = orgsCol.find(
+            {"username": {"$regex": "^%s$" % (data.get("username")), "$options": "i"}}
+        ).limit(1)
         if username_match.count() > 0:
             return (
                 flask.jsonify(

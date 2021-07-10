@@ -10,10 +10,10 @@ from main import orgsCol
 
 @orgsLoginBP.route("/api/v1/orgs/login", methods=["GET", "POST"])
 async def orgsSignupFunction():
-    data = flask.request.get_json(force=True)
+    data = flask.request.get_json()
     if data.get("username") and data.get("password"):
         account = {
-            "username": data.get("username"),
+            "username": {"$regex": "^%s$" % (data.get("username")), "$options": "i"},
             "password": data.get("password"),
         }
         account_match = orgsCol.find(account).limit(1)

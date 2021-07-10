@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
     app.run(
         host="0.0.0.0",
-        port=36667,
+        port=3444,
         threaded=True,
         debug=AZME_DEBUG,
     )
