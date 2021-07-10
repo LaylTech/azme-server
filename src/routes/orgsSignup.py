@@ -4,14 +4,14 @@ import uuid
 import flask
 from bson import json_util
 
-orgSignupBP = flask.Blueprint("orgSignup", __name__)
+orgsSignupBP = flask.Blueprint("orgsSignup", __name__)
 
 from main import orgsCol
 
 
-@orgSignupBP.route("/api/v1/org/signup", methods=["GET", "POST"])
-async def orgSignupFunction():
-    data = flask.request.get_json()
+@orgsSignupBP.route("/api/v1/orgs/signup", methods=["GET", "POST"])
+async def orgsSignupFunction():
+    data = flask.request.get_json(force=True)
     if data.get("username") and data.get("password") and data.get("org_name"):
         while True:
             auth = uuid.uuid4().hex
